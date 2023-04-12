@@ -21,7 +21,7 @@ public class Main {
 //after completing the execution of the threads, the count value will be 0 always
 
         my_share.setCount();
-        System.out.println("count: " + my_share.getCount());
+        System.out.println("counter: " + my_share.getCount());
 
     }
 
