@@ -6,23 +6,41 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
 
+        Integer[][] share_array;
         Semaphore semaphore = new Semaphore(1);
-        Shared my_share = new Shared();
 
-        DemoThread dt1 = new DemoThread(semaphore, "A");
-        DemoThread dt2 = new DemoThread(semaphore, "B");
-//stating both threads A and B   
-        dt1.start();
-        dt2.start();
-//waiting for thread A   
-        dt1.join();
-//waiting for thread B  
-        dt2.join();
-//after completing the execution of the threads, the count value will be 0 always
+        // Initializing provers
+        Prover p1 = new Prover();
+        Prover p2 = new Prover();
+        Prover p3 = new Prover();
 
-        my_share.setCount();
-        System.out.println("counter: " + my_share.getCount());
+        share_array = p1.getShare();
+        System.out.println("P1 shares: "
+                + "(" + share_array[0][0] + "," + share_array[1][0] + ") - "
+                + "(" + share_array[0][1] + "," + share_array[1][1] + ") - "
+                + "(" + share_array[0][2] + "," + share_array[1][2] + ")");
 
+        share_array = p2.getShare();
+        System.out.println("P2 shares: "
+                + "(" + share_array[0][0] + "," + share_array[1][0] + ") - "
+                + "(" + share_array[0][1] + "," + share_array[1][1] + ") - "
+                + "(" + share_array[0][2] + "," + share_array[1][2] + ")");
+
+        share_array = p3.getShare();
+        System.out.println("P3 shares: "
+                + "(" + share_array[0][0] + "," + share_array[1][0] + ") - "
+                + "(" + share_array[0][1] + "," + share_array[1][1] + ") - "
+                + "(" + share_array[0][2] + "," + share_array[1][2] + ")");
+
+        VerifierThread v1 = new VerifierThread(semaphore, "V1");
+        v1.start(); // starting verifier 1
+
+        // Starting VCG
+        ProverThread p1_t = new ProverThread(semaphore, "P1");
+        p1_t.start();
+        p1_t.join();
+
+        v1.join(); // release verifier 1
     }
 
 }

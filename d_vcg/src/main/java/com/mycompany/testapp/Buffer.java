@@ -1,18 +1,18 @@
 package com.mycompany.testapp;
 
-public class Shared {
+public class Buffer {
     
     // unique istance
-    private static Shared instance = null;
+    private static Buffer instance = null;
     private int count = 0;
 
     // constructor
-    public Shared () {}
+    public Buffer () {}
     
     // create object if it doesn't exist
-    public static Shared getIstance() {
+    public static synchronized Buffer getIstance() {
     if (instance == null) {
-            instance = new Shared();
+            instance = new Buffer();
         }
         return instance;
     }
