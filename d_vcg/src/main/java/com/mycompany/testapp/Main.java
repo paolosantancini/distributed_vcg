@@ -37,10 +37,17 @@ public class Main {
 
         // Starting VCG
         ProverThread p1_t = new ProverThread(semaphore, "P1");
+        ProverThread p2_t = new ProverThread(semaphore, "P2");
+        ProverThread p3_t = new ProverThread(semaphore, "P3");
         p1_t.start();
-        p1_t.join();
+        p2_t.start();
+        p3_t.start();
 
         v1.join(); // release verifier 1
+        p1_t.join();
+        p2_t.join();
+        p3_t.join();
+
     }
 
 }
