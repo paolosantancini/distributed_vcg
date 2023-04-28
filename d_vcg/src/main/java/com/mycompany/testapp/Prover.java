@@ -5,8 +5,8 @@ import java.util.Random;
 public class Prover {
 
     private final Integer a, b, c;
-    private final Integer x1, x2, x3, secret;
-    private Integer y1, y2, y3;
+    private final Integer x1, x2, secret, tokens;
+    private Integer y1, y2;
     private Integer[][] y;
 
     Prover() {
@@ -16,14 +16,15 @@ public class Prover {
         
         Random ran = new Random();
 
-        x1 = ran.nextInt(100);
-        x2 = ran.nextInt(100);
-        x3 = ran.nextInt(100);
+        x1 = 1+ran.nextInt(10);
+        x2 = 1+ran.nextInt(10);
 
-        secret = ran.nextInt(10000);
-        a = ran.nextInt(100);
-        b = ran.nextInt(100);
+        secret = 100+ran.nextInt(100);
+        a = 1+ran.nextInt(10);
+        b = 1+ran.nextInt(10);
         c = secret;
+        
+        tokens = 200;
         
         setShare();
 
@@ -32,10 +33,9 @@ public class Prover {
     private void setShare() {
         y1 = a * (x1 ^ 2) + b * x1 + secret;
         y2 = a * (x2 ^ 2) + b * x2 + secret;
-        y3 = a * (x3 ^ 2) + b * x3 + secret;
         Integer[][] points = {
-            {x1, x2, x3}, // first row with three colums
-            {y1, y2, y3} // second row with three colums
+            {x1, x2}, // first row with three colums
+            {y1, y2} // second row with three colums
         };
         y = points;
     }

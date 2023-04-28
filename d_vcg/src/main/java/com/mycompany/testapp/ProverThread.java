@@ -7,13 +7,15 @@ public class ProverThread extends Thread {
 //object of the Semaphore class  
     Semaphore semaphore;
     String threadName;
-    Buffer my_share = Buffer.getIstance();
+    Buffer my_buffer = Buffer.getIstance();
+    Integer[][] my_shares;
 
     // constructor
-    public ProverThread(Semaphore semaphore, String threadName) {
+    public ProverThread(Semaphore semaphore, String threadName, Integer[][] shares) {
         super(threadName);
         this.semaphore = semaphore;
         this.threadName = threadName;
+        this.my_shares = shares;
     }
 
     @Override
@@ -26,8 +28,12 @@ public class ProverThread extends Thread {
                 semaphore.acquire(); // Acquiring the lock  
                 System.out.println(threadName + " gets a permit.");
                 for (int i = 0; i < 1; i++) {
-                    this.my_share.setCount();
+                    this.my_buffer.setCount();
                 }
+
+                // set shares to buffer
+                my_buffer.setBufferAllShares(my_shares);
+
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("Error: " + e);
@@ -43,8 +49,11 @@ public class ProverThread extends Thread {
                 semaphore.acquire(); // Acquiring the lock  
                 System.out.println(threadName + " gets a permit.");
                 for (int i = 0; i < 1; i++) {
-                    this.my_share.setCount();
+                    this.my_buffer.setCount();
                 }
+
+                my_buffer.setBufferAllShares(my_shares);
+
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("Error: " + e);
@@ -60,8 +69,11 @@ public class ProverThread extends Thread {
                 semaphore.acquire(); // Acquiring the lock  
                 System.out.println(threadName + " gets a permit.");
                 for (int i = 0; i < 1; i++) {
-                    this.my_share.setCount();
+                    this.my_buffer.setCount();
                 }
+
+                my_buffer.setBufferAllShares(my_shares);
+                
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 System.out.println("Error: " + e);
