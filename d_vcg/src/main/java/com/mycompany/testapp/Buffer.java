@@ -4,15 +4,15 @@ public class Buffer {
 
     // unique istance
     private static Buffer instance = null;
-    private int count = 0, i = 0, j=0;
+    private int count = 0, i = 0, j = 0;
     // Defining couple point's container [col][row]
     private Integer[][] all_shares = {
-            {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},{0, 0}, 
-            {0, 0}  
-        };
-    private Integer[][] bids = {
-            {0, 0}, {0, 0}, {0, 0}  
-        };
+        {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},
+        {0, 0}
+    };
+    // Define bid as x, y, bid_value
+    private Integer[] bids = {0, 0, 0};
+    private Integer[] point;
 
     // constructor
     public Buffer() {
@@ -26,9 +26,16 @@ public class Buffer {
         return instance;
     }
 
-    // upper count method
-    public void setCount(String prover) {
-        if (prover.contentEquals("P1")) {count++;}
+// init counters
+    public void init() {
+        i = j = 0;
+    }
+
+// upper count method
+    public void setCount() {
+        //if (prover.contentEquals("P1")) {
+        count++;
+        //}
     }
 
     public int getCount() {
@@ -36,28 +43,33 @@ public class Buffer {
     }
 
     public void setBufferAllShares(Integer[][] shares) {
-               
+
         all_shares[i][0] = shares[0][0]; // x
         all_shares[i][1] = shares[1][0]; // y
-  
+
         i += 1;
-        
-        /*
-        AGGIUNGERE LA COMPILAZIONE DELLA MATRICE CON PESI, VALUTAZIONE
-        DEL PROVER (TOKENS).
-        ALLA FINE DEL PROCESSO CALCOLARE LA MATRICE DELLE SCELTE E VIA DICENDO...
-        */
-        
+
     }
-    
-    public Integer[][] getAllShares(){
+
+    public Integer[][] getAllShares() {
         return all_shares;
     }
 
-    public void setBids(int x, int y) {
-        bids[j][0] = 0;
-        bids[j][1] = 0;
+    public void setPoint(Integer[] p) {
+        point = p;
+    }
+
+    public Integer[] getPoint() {
+        return point;
+    }
+
+    public void setBids(Integer bid) {
+        bids[j] = bid;
         j += 1;
     }
-    
+
+    public Integer[] getBids() {
+        return bids;
+    }
+
 }

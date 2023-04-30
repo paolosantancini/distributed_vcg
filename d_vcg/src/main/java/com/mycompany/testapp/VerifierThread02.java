@@ -15,13 +15,14 @@ public class VerifierThread02 extends Thread {
     @Override
     public void run() {
         // run by thread checker
-        System.out.println("Thread " + threadName + " is verifing...");
-
-        do {
+        if (this.my_buffer.getCount() == 1) {
+            System.out.println(threadName + " say light turned on!!!");
+        } else {
+            System.out.println(threadName + " say light not turned on!!!");
+        }
+        /*do {
             // loop
-        } while (this.my_buffer.getCount() == 0);
+        } while (this.my_buffer.getCount() == 0);*/
 
-        System.out.println(threadName + " gets count to "
-                + this.my_buffer.getCount() + " end the process");
     }
 }

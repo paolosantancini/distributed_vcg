@@ -2,7 +2,7 @@ package com.mycompany.testapp;
 
 import java.util.concurrent.*;
 
-public class ProverThread extends Thread {
+public class ProverThread00 extends Thread {
 
 //object of the Semaphore class  
     Semaphore semaphore;
@@ -11,7 +11,7 @@ public class ProverThread extends Thread {
     Integer[][] my_shares;
 
     // constructor
-    public ProverThread(Semaphore semaphore, String threadName, Integer[][] shares) {
+    public ProverThread00(Semaphore semaphore, String threadName, Integer[][] shares) {
         super(threadName);
         this.semaphore = semaphore;
         this.threadName = threadName;
@@ -22,20 +22,19 @@ public class ProverThread extends Thread {
     public void run() {
         // run by thread
         //if (this.getName().equals("P1")) {
-        System.out.println("Starting thread " + threadName);
         try {
-            System.out.println(threadName + " is waiting for a permit.");
+
             semaphore.acquire(); // Acquiring the lock  
-            System.out.println(threadName + " gets a permit.");
-            this.my_buffer.setCount(threadName);
+
             // set shares to buffer
             my_buffer.setBufferAllShares(my_shares);
+            System.out.println(threadName+ " set own point: ("+
+                    my_shares[0][0]+","+my_shares[1][0]+")");
 
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             System.out.println("Error: " + e);
         }
-        System.out.println("Thread " + threadName + " releases the permit.");
         semaphore.release(); //release the permit  
         //}
     }

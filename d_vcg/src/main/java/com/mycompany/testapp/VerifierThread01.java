@@ -1,5 +1,7 @@
 package com.mycompany.testapp;
 
+import java.util.Random;
+
 public class VerifierThread01 extends Thread {
 
 //object of the Semaphore class 
@@ -15,13 +17,22 @@ public class VerifierThread01 extends Thread {
     @Override
     public void run() {
         // run by thread bid's manager
-        System.out.println("Thread " + threadName + " is verifing...");
 
-        do {
-            // loop
-        } while (this.my_buffer.getCount() == 0);
+        Integer[][] shares;
+        int j;
+        
+        Random ran = new Random();
 
-        System.out.println(threadName + " gets count to "
-                + this.my_buffer.getCount() + " end the process");
+        shares = my_buffer.getAllShares();
+        
+        j = ran.nextInt(9);
+        
+        // select random point from shares
+        Integer[] point = {shares[j][0], shares[j][1] };
+                
+        my_buffer.setPoint(point);
+        
+        System.out.println(threadName+" select point: (" + point[0]+","+point[1]+")");
+        
     }
 }

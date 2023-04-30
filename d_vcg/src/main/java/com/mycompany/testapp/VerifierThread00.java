@@ -22,22 +22,16 @@ public class VerifierThread00 extends Thread {
     public void run() {
         // run by thread
         //if (this.getName().equals("V1")) {
-        System.out.println("Starting thread " + threadName);
-
         try {
-            System.out.println(threadName + " is waiting for a permit.");
             semaphore.acquire(); // Acquiring the lock
-            System.out.println(threadName + " gets a permit.");
             my_buffer.setBufferAllShares(this.my_shares);
-
         } catch (InterruptedException e) {
             System.out.println("Error: " + e);
         }
         semaphore.release(); //release the permit 
 
-        System.out.println(threadName + " gets count to "
-                + this.my_buffer.getCount() + " end the process");
-        System.out.println("Releasing thread " + threadName);
+        System.out.println(threadName + " set fictitious point: ("+
+                my_shares[0][0]+","+my_shares[1][0]+")");
         //}
     }
 }

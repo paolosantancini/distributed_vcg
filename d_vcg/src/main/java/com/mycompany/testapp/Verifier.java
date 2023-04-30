@@ -29,9 +29,5 @@ public class Verifier {
     public Integer[][] getShare() {
         return (y);
     }
-    
-    public Integer selectTester(){
-        return (1+ran.nextInt(6));
-    }
 
 }
