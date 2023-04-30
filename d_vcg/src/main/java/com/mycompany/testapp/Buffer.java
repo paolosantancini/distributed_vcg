@@ -4,11 +4,14 @@ public class Buffer {
 
     // unique istance
     private static Buffer instance = null;
-    private int count = 0, i = 0;
+    private int count = 0, i = 0, j=0;
+    // Defining couple point's container [col][row]
     private Integer[][] all_shares = {
-            {0, 0}, // first couple of points
-            {0, 0}, // second couple of points
-            {0, 0}  // third couple of points
+            {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0}, {0, 0},{0, 0}, 
+            {0, 0}  
+        };
+    private Integer[][] bids = {
+            {0, 0}, {0, 0}, {0, 0}  
         };
 
     // constructor
@@ -24,8 +27,8 @@ public class Buffer {
     }
 
     // upper count method
-    public void setCount() {
-        count++;
+    public void setCount(String prover) {
+        if (prover.contentEquals("P1")) {count++;}
     }
 
     public int getCount() {
@@ -34,17 +37,27 @@ public class Buffer {
 
     public void setBufferAllShares(Integer[][] shares) {
                
-        System.out.println("(" + shares[0][0] + "," + shares[1][0] + ") - "
-                        + "(" + shares[0][1] + "," + shares[1][1] + ")");
-        
-       
-        all_shares[0][0] = shares[i][i];
+        all_shares[i][0] = shares[0][0]; // x
+        all_shares[i][1] = shares[1][0]; // y
   
         i += 1;
         
-        //System.out.println("(" + all_shares[0][0] + "," + all_shares[0 + 1][0] + ") - "
-          //      + "(" + all_shares[0][0 + 1] + "," + all_shares[0 + 1][0 + 1] + ")");
-
+        /*
+        AGGIUNGERE LA COMPILAZIONE DELLA MATRICE CON PESI, VALUTAZIONE
+        DEL PROVER (TOKENS).
+        ALLA FINE DEL PROCESSO CALCOLARE LA MATRICE DELLE SCELTE E VIA DICENDO...
+        */
+        
+    }
+    
+    public Integer[][] getAllShares(){
+        return all_shares;
     }
 
+    public void setBids(int x, int y) {
+        bids[j][0] = 0;
+        bids[j][1] = 0;
+        j += 1;
+    }
+    
 }

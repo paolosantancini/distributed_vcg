@@ -13,8 +13,27 @@ public class Main {
         Prover p2 = new Prover();
         Prover p3 = new Prover();
 
-        VerifierThread v1 = new VerifierThread(semaphore, "V1");
-        v1.start(); // starting verifier 1
+        Verifier v1 = new Verifier();
+        Verifier v2 = new Verifier();
+        Verifier v3 = new Verifier();
+        Verifier v4 = new Verifier();
+        Verifier v5 = new Verifier();
+        Verifier v6 = new Verifier();
+        
+        VerifierThread00 v1_t = new VerifierThread00(semaphore, "V1", v1.getShare());
+        VerifierThread00 v2_t = new VerifierThread00(semaphore, "V2", v2.getShare());
+        VerifierThread00 v3_t = new VerifierThread00(semaphore, "V3", v3.getShare());
+        VerifierThread00 v4_t = new VerifierThread00(semaphore, "V4", v4.getShare());
+        VerifierThread00 v5_t = new VerifierThread00(semaphore, "V5", v5.getShare());
+        VerifierThread00 v6_t = new VerifierThread00(semaphore, "V6", v6.getShare());
+        
+        // Starting verifiers
+        v1_t.start(); 
+        v2_t.start();
+        v3_t.start();
+        v4_t.start();
+        v5_t.start();
+        v6_t.start();
 
         // Starting VCG
         ProverThread p1_t = new ProverThread(semaphore, "P1", p1.getShare());
@@ -24,11 +43,28 @@ public class Main {
         p2_t.start();
         p3_t.start();
 
-        v1.join(); // release verifier 1
+        // release threads
+        v1_t.join();
+        v2_t.join();
+        v3_t.join();
+        v4_t.join();
+        v5_t.join();
+        v6_t.join();
+        
         p1_t.join();
         p2_t.join();
         p3_t.join();
-
+        
+        VerifierThread02 v1_t1 = new VerifierThread02("V1");
+        VerifierThread02 v2_t1 = new VerifierThread02("V2");
+        VerifierThread02 v3_t1 = new VerifierThread02("V3");
+        v1_t1.start();
+        v2_t1.start();
+        v3_t1.start();
+        v1_t1.join();
+        v2_t1.join();
+        v3_t1.join();
+        
     }
 
 }
